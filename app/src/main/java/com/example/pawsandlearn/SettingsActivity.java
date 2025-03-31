@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SettingsActivity extends AppCompatActivity {
     ImageView ivCat, ivDog, ivQuiz;
+    Button btnCat,btnDog,btnQuiz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,23 +24,26 @@ public class SettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        btnCat=findViewById(R.id.btnCat);
+        btnDog=findViewById(R.id.btnDog);
+        btnQuiz=findViewById(R.id.btnQuiz);
         ivCat=findViewById(R.id.ivCat);
         ivDog=findViewById(R.id.ivDog);
         ivQuiz=findViewById(R.id.ivQuiz);
         ivCat.setImageResource(R.drawable.cat_image);
         ivDog.setImageResource(R.drawable.dog_image);
         ivQuiz.setImageResource(R.drawable.quiz_image);
-        ivCat.setOnClickListener(view -> {
+        btnCat.setOnClickListener(view -> {
 //            Intent intent=new Intent(this,CatsActivity.class);
 //            startActivity(intent);
             System.out.println("Start CatsActivity");
         });
-        ivDog.setOnClickListener(view -> {
+        btnDog.setOnClickListener(view -> {
 //            Intent intent=new Intent(this,DogsActivity.class);
 //            startActivity(intent);
             System.out.println("Start DogsActivity");
         });
-        ivQuiz.setOnClickListener(view -> {
+        btnQuiz.setOnClickListener(view -> {
 //            Intent intent=new Intent(this,QuizActivity.class);
 //            startActivity(intent);
             System.out.println("Start QuizActivity");
