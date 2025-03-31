@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dogListView" type="id" />
+    <item name="breedImage" type="id" />
+    <item name="breedName" type="id" />
+</resources>
