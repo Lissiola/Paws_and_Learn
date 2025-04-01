@@ -1,5 +1,6 @@
 package com.example.pawsandlearn;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -23,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         });
         btnStart=findViewById(R.id.btnStart);
         btnStart.setOnClickListener(view -> {
-            //start your activity
+            Intent intent = new Intent(getApplicationContext(), CatActivity.class);
+            //intent.putExtra("username",etData.getText().toString());
+            startActivity(intent);
         });
     }
 }
