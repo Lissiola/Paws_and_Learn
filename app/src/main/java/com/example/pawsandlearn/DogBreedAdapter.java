@@ -27,12 +27,18 @@ public class DogBreedAdapter extends ArrayAdapter<DogBreed> {
         }
 
         DogBreed breed = getItem(position);
+
         TextView nameTextView = convertView.findViewById(R.id.breedName);
+        TextView breedGroupTextView = convertView.findViewById(R.id.breedGroup);
+        TextView lifeSpanTextView = convertView.findViewById(R.id.lifeSpan);
+        TextView originTextView = convertView.findViewById(R.id.origin);
         ImageView imageView = convertView.findViewById(R.id.breedImage);
 
         nameTextView.setText(breed.name);
+        breedGroupTextView.setText("Group: " + breed.breedGroup);
+        lifeSpanTextView.setText("Lifespan: " + breed.lifeSpan);
+        originTextView.setText("Origin: " + breed.origin);
 
-        // Download and display the image asynchronously
         new ImageLoaderTask(imageView).execute(breed.imageUrl);
 
         return convertView;

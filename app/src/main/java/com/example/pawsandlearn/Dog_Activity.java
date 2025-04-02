@@ -16,11 +16,17 @@ import java.util.List;
 class DogBreed {
     String name;
     String imageUrl;
+    String breedGroup;
+    String lifeSpan;
+    String origin;
     Bitmap image;
 
-    public DogBreed(String name, String imageUrl) {
+    public DogBreed(String name, String imageUrl, String breedGroup, String lifeSpan, String origin) {
         this.name = name;
         this.imageUrl = imageUrl;
+        this.breedGroup = breedGroup;
+        this.lifeSpan = lifeSpan;
+        this.origin = origin;
     }
 }
 
@@ -60,9 +66,14 @@ public class Dog_Activity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.toString());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject item = jsonArray.getJSONObject(i);
+
                     String name = item.getString("name");
                     String imageUrl = item.has("image") ? item.getJSONObject("image").getString("url") : null;
-                    breeds.add(new DogBreed(name, imageUrl));
+                    String breedGroup = item.optString("breed_group", "Unknown");
+                    String lifeSpan = item.optString("life_span", "Unknown");
+                    String origin = item.optString("origin", "Unknown");
+
+                    breeds.add(new DogBreed(name, imageUrl, breedGroup, lifeSpan, origin));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
