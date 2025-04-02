@@ -1,9 +1,11 @@
 package com.example.pawsandlearn;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +25,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-//import java.util.Random;
+import java.util.Random;
 
 public class QuizActivity extends AppCompatActivity {
     RequestQueue queue;
     ArrayList<JSONObject> catBreeds, dogBreeds, questions;
     int qCount=0;
     ImageView imgBreed;
+    TextView txtResult;
     Button btnRed, btnBlue, btnYellow, btnGreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class QuizActivity extends AppCompatActivity {
         questions = new ArrayList<>();
 
         imgBreed = findViewById(R.id.imgBreed);
+        txtResult = findViewById(R.id.txtResult);
         btnRed = findViewById(R.id.btnRed);
         btnBlue = findViewById(R.id.btnBlue);
         btnYellow = findViewById(R.id.btnYellow);
@@ -85,7 +89,18 @@ public class QuizActivity extends AppCompatActivity {
                 catBreeds.clear();
                 JSONArray res=(JSONArray) response;
                 for(int i=0;i<res.length();i++){
-                    catBreeds.add((JSONObject) res.get(i));
+                    if(i==30||i==41){
+                        continue;
+                    }
+                    JSONObject catObj = response.getJSONObject(i);
+                    String catName = catObj.getString("name");
+                    String catURL = response.getJSONObject(i).getJSONObject("image").getString("url");
+
+                    JSONObject catData = new JSONObject();
+                    catData.put("name", catName);
+                    catData.put("image", catURL);
+
+                    catBreeds.add(catData);
                 }
                 System.out.println(Arrays.asList(dogBreeds));
                 System.out.println(Arrays.asList(catBreeds));
@@ -102,18 +117,27 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void start(){
-        if(dogBreeds.size()<5){
+        if(dogBreeds.size()<5||catBreeds.size()<5){
             return;
         }
 
         questions.clear();
         //loops 5 times adding 5 dog breeds to questions array list
         for(int i=0; i<5; i++){
-            //Random random = new Random();
-            //int randInd = random.nextInt(dogBreeds.size());
-            int randInd = (int) (Math.random() * dogBreeds.size());
+            Random random = new Random();
+            int randInd = random.nextInt(dogBreeds.size());
+            //int randInd = (int) (Math.random() * dogBreeds.size());
             //questions.add(dogBreeds.get(randInd));
             questions.add(dogBreeds.get(randInd)); //adds a random index of the dog breeds to the questions array list
+        }
+
+        //loops 5 times adding 5 cat breeds to questions array list
+        for(int i=0; i<5; i++){
+            Random random = new Random();
+            int randInd = random.nextInt(catBreeds.size());
+            //int randInd = (int) (Math.random() * dogBreeds.size());
+            //questions.add(dogBreeds.get(randInd));
+            questions.add(catBreeds.get(randInd)); //adds a random index of the dog breeds to the questions array list
         }
 
         //do the same for cat breeds
@@ -130,9 +154,9 @@ public class QuizActivity extends AppCompatActivity {
             Picasso.get().load(imageURL).into(imgBreed);
 
             String[] multChoice = new String[4];
-            int rightAnswer = (int)(Math.random()*4);
-            //Random random = new Random();
-            //int rightAnswer = random.nextInt(4);
+            //int rightAnswer = (int)(Math.random()*4);
+            Random random = new Random();
+            int rightAnswer = random.nextInt(4);
             multChoice[rightAnswer] = name;
 
             //generates the random mult choice answers for the rest
@@ -149,9 +173,9 @@ public class QuizActivity extends AppCompatActivity {
                 }
 
                 while(true){
-                    //Random random2 = new Random();
-                    //int randomIndex = random2.nextInt(breedList.size());
-                    int randomIndex = (int)(Math.random()*breedList.size());
+                    Random random2 = new Random();
+                    int randomIndex = random2.nextInt(breedList.size());
+                    //int randomIndex = (int)(Math.random()*breedList.size());
                     String randomBreed = breedList.get(randomIndex).getString("name");
                     if (!randomBreed.equals(name)) {
                         multChoice[i] = randomBreed;
@@ -177,10 +201,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void checkAnswer(String selected, String correct) {
         if (selected.equals(correct)) {
-            //txtQuestion.setText("Correct!");
+            txtResult.setText("Correct!");
+            txtResult.setTextColor(Color.GREEN);
             System.out.print("Correct!");
         } else {
-            //txtQuestion.setText("Wrong! It was " + correct);
+            txtResult.setText("Wrong! It was " + correct);
+            txtResult.setTextColor(Color.RED);
             System.out.println("Incorrect! It was" + correct);
         }
 
