@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,19 +35,16 @@ public class SettingsActivity extends AppCompatActivity {
         ivDog.setImageResource(R.drawable.dog_image);
         ivQuiz.setImageResource(R.drawable.quiz_image);
         btnCat.setOnClickListener(view -> {
-//            Intent intent=new Intent(this,CatsActivity.class);
-//            startActivity(intent);
-            System.out.println("Start CatsActivity");
+            Intent intent=new Intent(this,CatsActivity.class);
+            startActivity(intent);
         });
         btnDog.setOnClickListener(view -> {
-//            Intent intent=new Intent(this,DogsActivity.class);
-//            startActivity(intent);
-            System.out.println("Start DogsActivity");
+            Intent intent=new Intent(this,DogsActivity.class);
+            startActivity(intent);
         });
         btnQuiz.setOnClickListener(view -> {
-//            Intent intent=new Intent(this,QuizActivity.class);
-//            startActivity(intent);
-            System.out.println("Start QuizActivity");
+            Intent intent=new Intent(this,QuizActivity.class);
+            startActivity(intent);
         });
     }
 }
