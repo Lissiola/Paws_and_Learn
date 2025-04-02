@@ -1,78 +1,66 @@
 package com.example.pawsandlearn;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
-public class DogBreedAdapter extends ArrayAdapter<DogBreed> {
-    public DogBreedAdapter(Context context, List<DogBreed> breeds) {
-        super(context, 0, breeds);
+public class DogBreedAdapter extends BaseAdapter {
+    private final List<DogBreed> dogs;
+    private final Context context;
+
+    public DogBreedAdapter(Context context, List<DogBreed> dogs) {
+        this.context = context;
+        this.dogs = dogs;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_dog, parent, false);
-        }
-
-        DogBreed breed = getItem(position);
-
-        TextView nameTextView = convertView.findViewById(R.id.breedName);
-        TextView breedGroupTextView = convertView.findViewById(R.id.breedGroup);
-        TextView lifeSpanTextView = convertView.findViewById(R.id.lifeSpan);
-        TextView originTextView = convertView.findViewById(R.id.origin);
-        ImageView imageView = convertView.findViewById(R.id.breedImage);
-
-        nameTextView.setText(breed.name);
-        breedGroupTextView.setText("Group: " + breed.breedGroup);
-        lifeSpanTextView.setText("Lifespan: " + breed.lifeSpan);
-        originTextView.setText("Origin: " + breed.origin);
-
-        new ImageLoaderTask(imageView).execute(breed.imageUrl);
-
-        return convertView;
+    public int getCount() {
+        return dogs.size();
     }
 
-    private static class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
-        private ImageView imageView;
+    @Override
+    public Object getItem(int i) {
+        return dogs.get(i);
+    }
 
-        public ImageLoaderTask(ImageView imageView) {
-            this.imageView = imageView;
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        if (view == null)
+            view = LayoutInflater.from(context).inflate(R.layout.list_item_dog, viewGroup, false);
+
+        DogBreed dog = dogs.get(i);
+
+        TextView nameTextView = view.findViewById(R.id.breedName);
+        TextView breedGroup = view.findViewById(R.id.breedGroup);
+        TextView originTextView = view.findViewById(R.id.origin);
+        TextView lifeSpanTextView = view.findViewById(R.id.lifeSpan);
+        ImageView imageView = view.findViewById(R.id.breedImage);
+
+        nameTextView.setText("Breed: " + dog.name);
+        breedGroup.setText("BreedGroup: " + dog.breedGroup);
+        lifeSpanTextView.setText("Lifespan: " + dog.lifeSpan);
+        if (dog.origin == "Unknown" || dog.origin == "") {
+            originTextView.setText("");
+        } else {
+            originTextView.setText("Origin: " + dog.origin);
+        }
+        if (dog.imageUrl != null && !dog.imageUrl.isEmpty()) {
+            Picasso.get().load(dog.imageUrl).into(imageView);
         }
 
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String imageUrl = urls[0];
-            Bitmap bitmap = null;
-            try {
-                URL url = new URL(imageUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                bitmap = BitmapFactory.decodeStream(input);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            if (result != null) {
-                imageView.setImageBitmap(result);
-            }
-        }
+        return view;
     }
 }
