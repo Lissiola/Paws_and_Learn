@@ -1,5 +1,5 @@
 package com.example.pawsandlearn;
-
+//IMPORTS
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -27,13 +27,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+//Quiz activity!! This activity tests the users on what they learned in previous activities in
+// the form of a 10 question quiz, 5 questions about dog breeds, and 10 about cat breed. These are photos randomly
+//generated and the user must select the correct multiple choice button for what breed is pictured.
+//The score is not kept, this is just for fun to test their knowledge, however it does display whether their answer was
+//correct or incorrect, and if it is incorrect then it displays the correct answer in a textView after.
 public class QuizActivity extends AppCompatActivity {
-    RequestQueue queue;
-    ArrayList<JSONObject> catBreeds, dogBreeds, questions;
-    int qCount=0;
+    RequestQueue queue; // for API calls
+    ArrayList<JSONObject> catBreeds, dogBreeds, questions; //Array lists for all cat breeds, all dog breeds, and the 10 questions (5 of each)
+    int qCount=0; //counts index of the questions
+    //xml definitions
     ImageView imgBreed;
     TextView txtResult;
     Button btnRed, btnBlue, btnYellow, btnGreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +51,13 @@ public class QuizActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //inializing the array lists
         dogBreeds=new ArrayList<>();
         catBreeds=new ArrayList<>();
         questions = new ArrayList<>();
 
+        //initializing the xml elements
         imgBreed = findViewById(R.id.imgBreed);
         txtResult = findViewById(R.id.txtResult);
         btnRed = findViewById(R.id.btnRed);
@@ -55,41 +65,48 @@ public class QuizActivity extends AppCompatActivity {
         btnYellow = findViewById(R.id.btnYellow);
         btnGreen = findViewById(R.id.btnGreen);
 
+        //inializing the volley request queue
         queue = Volley.newRequestQueue(this);
+        //storing the api urls
         String url1  = "https://api.thedogapi.com/v1/breeds?api_key=live_ZTcjNqmEYLr05bs1a5FVB3bXD5geERNEhKgHLiDTgpg5dNOXQSEjvTtARtKYZeM2";
         String url2 = "https://api.thecatapi.com/v1/breeds?api_key=live_VlMdBZ0vyekrJGwlOn2X79pqhW2X6O2vhOeWpM77dRWjtRwITvhlun6ZMBsZHGCX";
 
+        //this gets the dog breeds from the api
         JsonArrayRequest dogRequest = new JsonArrayRequest(Request.Method.GET, url1, null, response -> {
-            System.out.println(response);
+            System.out.println(response); //for checking
             try {
-                dogBreeds.clear();
-                JSONArray res=(JSONArray) response;
+                dogBreeds.clear(); //removes old data before adding new
+                JSONArray res=(JSONArray) response; //converts response to JSON array
+                //loops through each item in the array and adds to JSON dogObject
                 for(int i=0;i<res.length();i++){
                     JSONObject dogObj = response.getJSONObject(i);
-                    String dogName = dogObj.getString("name");
-                    String dogURL = response.getJSONObject(i).getJSONObject("image").getString("url");
+                    String dogName = dogObj.getString("name"); //gets the dog breed name from object
+                    String dogURL = response.getJSONObject(i).getJSONObject("image").getString("url"); //gets image URL from object
 
+                    //creates new object to store the name and url
                     JSONObject dogData = new JSONObject();
                     dogData.put("name", dogName);
                     dogData.put("image", dogURL);
 
+                    //add this new object to array list
                     dogBreeds.add(dogData);
                 }
-                start();
+                start(); //calls start method
             } catch (JSONException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException(e); //handles exception
             }
 
         }, error -> {
-            System.out.println(error);
+            System.out.println(error); //pints errors
         });
+        //does the same as the dog but for the cats
         JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, url2, null, response -> {
             System.out.println(response);
             try {
                 catBreeds.clear();
                 JSONArray res=(JSONArray) response;
                 for(int i=0;i<res.length();i++){
-                    if(i==30||i==41){
+                    if(i==30||i==41){ //added if statement because 30 and 41 is not included in cat api
                         continue;
                     }
                     JSONObject catObj = response.getJSONObject(i);
@@ -104,6 +121,7 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 System.out.println(Arrays.asList(dogBreeds));
                 System.out.println(Arrays.asList(catBreeds));
+                start();
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -116,47 +134,52 @@ public class QuizActivity extends AppCompatActivity {
         queue.add(catRequest);
     }
 
+    //start method called when quiz activity starts(and data is ready)
     private void start(){
+        //just returns right away if dogbreed or cat breeds has less than 5 elements (we need 5 of each)
         if(dogBreeds.size()<5||catBreeds.size()<5){
             return;
         }
 
-        questions.clear();
+        questions.clear(); //clears questions array list
+
         //loops 5 times adding 5 dog breeds to questions array list
         for(int i=0; i<5; i++){
+            //generates random number (in scope of dog breed array size)
             Random random = new Random();
             int randInd = random.nextInt(dogBreeds.size());
-            //int randInd = (int) (Math.random() * dogBreeds.size());
-            //questions.add(dogBreeds.get(randInd));
             questions.add(dogBreeds.get(randInd)); //adds a random index of the dog breeds to the questions array list
         }
 
         //loops 5 times adding 5 cat breeds to questions array list
         for(int i=0; i<5; i++){
+            //generates random number (in scope of cat breed array size)
             Random random = new Random();
             int randInd = random.nextInt(catBreeds.size());
-            //int randInd = (int) (Math.random() * dogBreeds.size());
-            //questions.add(dogBreeds.get(randInd));
             questions.add(catBreeds.get(randInd)); //adds a random index of the dog breeds to the questions array list
         }
 
-        //do the same for cat breeds
         //note: we do not need to shuffle the different breeds and orders around since they are already randomly picked
-        System.out.println("Questions size: " + questions.size());
+        System.out.println("Questions size: " + questions.size()); //just for checking
+        //calls next q method
         nextQ();
     }
 
+    //this method generages the next question
     private void nextQ(){
         try{
-            JSONObject currentQ = questions.get(qCount);
-            String name = currentQ.getString("name");
-            String imageURL = currentQ.getString("image");
-            Picasso.get().load(imageURL).into(imgBreed);
 
-            String[] multChoice = new String[4];
-            //int rightAnswer = (int)(Math.random()*4);
+            JSONObject currentQ = questions.get(qCount); //gets index from questions array list(qcount starts at index 0)
+            String name = currentQ.getString("name"); //gets name
+            String imageURL = currentQ.getString("image"); //gets image
+            Picasso.get().load(imageURL).into(imgBreed); //loads the image using picasso
+
+
+            String[] multChoice = new String[4]; //multiple choice array to store the options for user to pick
+            //creates random number in scope of number of options
             Random random = new Random();
             int rightAnswer = random.nextInt(4);
+            //uses the random number to store the right answer in that index (that way the answer isnt always in the same place)
             multChoice[rightAnswer] = name;
 
             //generates the random mult choice answers for the rest
