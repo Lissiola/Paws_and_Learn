@@ -5,11 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/material_dynamic_neutral40"
     tools:context=".QuizActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/material_dynamic_neutral40"
+        android:backgroundTint="@color/material_dynamic_neutral40"
+        android:backgroundTintMode="add">
 
         <Button
             android:id="@+id/btnGreen"
@@ -53,8 +57,11 @@
             android:id="@+id/txtPetQuiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#B2B5C0"
+            android:backgroundTintMode="add"
             android:fontFamily="cursive"
             android:text="Pet Quiz!"
+            android:textColor="#FFF4F4"
             android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/btnPrev"
@@ -68,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="What dog/cat breed is this?"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
