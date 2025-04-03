@@ -49,16 +49,19 @@ public class CatsAdapter extends BaseAdapter {
 
         Cats cat = cats.get(i);
 
+        //get listview fields
         TextView tvName = view.findViewById(R.id.tvName);
         TextView tvOrigin = view.findViewById(R.id.tvOrigin);
         TextView tvLifespan = view.findViewById(R.id.tvLifespan);
         ImageView ivCatPic = view.findViewById(R.id.ivCatPic);
 
+        //set listview info
         tvName.setText("Breed: " + cat.breed);
         tvOrigin.setText("Origin: " + cat.origin);
         tvLifespan.setText("Lifespan: " + cat.lifespan + " years");
-        Picasso.get().load(cat.picURL).into(ivCatPic); // that’s literally it!
+        Picasso.get().load(cat.picURL).into(ivCatPic);
 
+        //set onclick listener for each listview element. Call the popup function.
         view.setOnClickListener(v -> showPopupDialog(cat));
 
         return view;
@@ -78,6 +81,7 @@ public class CatsAdapter extends BaseAdapter {
         TextView tvDescriptionHint = dialogView.findViewById(R.id.tvDescriptionHint);
         Button btnWiki = dialogView.findViewById(R.id.btnWiki);
 
+        //put the information in all of the correct fields
         Picasso.get().load(cat.picURL).into(imageView);
         tvBreedHint.setText("Breed: " + cat.breed);
         tvOriginHint.setText("Origin: " + cat.origin);
@@ -86,12 +90,15 @@ public class CatsAdapter extends BaseAdapter {
         tvTemperamentHint.setText("Temperment: " + cat.temperament);
         tvDescriptionHint.setText("Description " + cat.description);
 
+        //onclick for the button
         btnWiki.setOnClickListener(v -> {
+            //pass cat wiki url to new intent
             String url = cat.wiki;
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             context.startActivity(intent);
         });
 
+        //build popup
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setView(dialogView)
                 .create();

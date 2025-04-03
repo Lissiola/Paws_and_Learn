@@ -1,16 +1,9 @@
 package com.example.pawsandlearn;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,9 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +46,8 @@ public class CatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         catBreeds=new ArrayList<>();
+
+        //make json request
         queue = Volley.newRequestQueue(this);
         String url="https://api.thecatapi.com/v1/breeds?api_key=live_VlMdBZ0vyekrJGwlOn2X79pqhW2X6O2vhOeWpM77dRWjtRwITvhlun6ZMBsZHGCX";
         JsonArrayRequest r = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
@@ -65,10 +58,11 @@ public class CatActivity extends AppCompatActivity {
                 System.out.println();
 
                 for(int i=0;i<array.length();i++) {
-                    // add the JSONObjects to the catBreeds arrayList
+
+                    //api does not have index 30 or 41, so skip
                     if(i==30||i==41)
                         continue;
-
+                    // add the JSONObjects to the catBreeds arrayList
                     String breed = response.getJSONObject(i).getString("name");
                     String origin = response.getJSONObject(i).getString("origin");
                     String lifespan = response.getJSONObject(i).getString("life_span");
@@ -94,7 +88,6 @@ public class CatActivity extends AppCompatActivity {
         }, error -> {
             System.out.println(error);
         });
-
 
         queue.add(r);
     }
