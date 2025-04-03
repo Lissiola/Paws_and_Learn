@@ -220,6 +220,10 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    private void prevClick(View v){
+        finish();
+    }
+
     /*
     private void yellowClick(View v){
         checkAnswer(multChoice[2], name);
