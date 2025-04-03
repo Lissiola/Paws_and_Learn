@@ -1,13 +1,16 @@
 package com.example.pawsandlearn;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -46,7 +49,6 @@ public class CatActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
 
-
         cats = new ArrayList<>();
         adapter = new CatsAdapter(cats,this);
 
@@ -64,11 +66,19 @@ public class CatActivity extends AppCompatActivity {
 
                 for(int i=0;i<array.length();i++) {
                     // add the JSONObjects to the catBreeds arrayList
+                    if(i==30||i==41)
+                        continue;
+
                     String breed = response.getJSONObject(i).getString("name");
                     String origin = response.getJSONObject(i).getString("origin");
                     String lifespan = response.getJSONObject(i).getString("life_span");
-                    String picURL = response.getJSONObject(i).getJSONObject("image").getString("url") ;//"https://i.imgur.com/tGbaZCY.jpg";
-                    Cats u = new Cats (breed,origin,lifespan, picURL);
+                    String picURL = response.getJSONObject(i).getJSONObject("image").getString("url") ;
+                    String weight = response.getJSONObject(i).getJSONObject("weight").getString("imperial");
+                    String temperament = response.getJSONObject(i).getString("temperament");
+                    String description = response.getJSONObject(i).getString("description");
+                    String wiki = response.getJSONObject(i).getString("wikipedia_url");
+
+                    Cats u = new Cats (breed,origin,lifespan, picURL, weight, temperament, description, wiki);
                     cats.add(u);
                     catBreeds.add((JSONObject) array.get(i));
 
@@ -76,6 +86,7 @@ public class CatActivity extends AppCompatActivity {
                 // accessing a specific element
                 System.out.println("First cat breed: "+catBreeds.get(0).getJSONObject("image").getString("url"));
                 adapter.notifyDataSetChanged();
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CatActivity">
+
+    <ImageView
+        android:id="@+id/ivCatHintImage"
+        android:layout_width="142dp"
+        android:layout_height="126dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvBreedHint"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
+        android:text="Breed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <TextView
+        android:id="@+id/tvLifespanHint"
+        android:layout_width="200dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:text="lifespan"
+        app:layout_constraintStart_toStartOf="@+id/tvOriginHint"
+        app:layout_constraintTop_toBottomOf="@+id/tvOriginHint" />
+
+    <TextView
+        android:id="@+id/tvWeightHint"
+        android:layout_width="206dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="24dp"
+        android:text="weight"
+        app:layout_constraintStart_toStartOf="@+id/tvLifespanHint"
+        app:layout_constraintTop_toBottomOf="@+id/tvLifespanHint" />
+
+    <TextView
+        android:id="@+id/tvTemperamentHint"
+        android:layout_width="261dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:text="temperment"
+        app:layout_constraintStart_toStartOf="@+id/tvWeightHint"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeightHint" />
+
+    <TextView
+        android:id="@+id/tvDescriptionHint"
+        android:layout_width="264dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="16dp"
+        android:text="description"
+        app:layout_constraintStart_toStartOf="@+id/tvTemperamentHint"
+        app:layout_constraintTop_toBottomOf="@+id/tvTemperamentHint" />
+
+    <TextView
+        android:id="@+id/tvOriginHint"
+        android:layout_width="141dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="8dp"
+        android:text="origin"
+        app:layout_constraintStart_toStartOf="@+id/tvBreedHint"
+        app:layout_constraintTop_toBottomOf="@+id/tvBreedHint" />
+
+    <Button
+        android:id="@+id/btnWiki"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Learn more"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCatHintImage"
+        app:layout_constraintVertical_bias="0.001" />
+</androidx.constraintlayout.widget.ConstraintLayout>

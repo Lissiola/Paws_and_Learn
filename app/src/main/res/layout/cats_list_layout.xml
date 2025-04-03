@@ -8,9 +8,10 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
         android:text="Name"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="332dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="328dp" />
 
     <TextView
         android:id="@+id/tvOrigin"
