@@ -194,11 +194,10 @@ public class QuizActivity extends AppCompatActivity {
                 } else {
                     breedList = catBreeds;
                 }
-
+                //assign names to random options in multiple choice array
                 while(true){
                     Random random2 = new Random();
                     int randomIndex = random2.nextInt(breedList.size());
-                    //int randomIndex = (int)(Math.random()*breedList.size());
                     String randomBreed = breedList.get(randomIndex).getString("name");
                     if (!randomBreed.equals(name)) {
                         multChoice[i] = randomBreed;
@@ -206,34 +205,38 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 }
             }
+            //assigns the answers to the buttons
             btnRed.setText(multChoice[0]);
             btnBlue.setText(multChoice[1]);
             btnYellow.setText(multChoice[2]);
             btnGreen.setText(multChoice[3]);
 
-            // Button click logic
+            //button click listeners calls checkAnswer method
             btnRed.setOnClickListener(v -> checkAnswer(multChoice[0], name));
             btnBlue.setOnClickListener(v -> checkAnswer(multChoice[1], name));
             btnYellow.setOnClickListener(v -> checkAnswer(multChoice[2], name));
             btnGreen.setOnClickListener(v -> checkAnswer(multChoice[3], name));
-
+//exception
         } catch (JSONException e){
             throw new RuntimeException(e);
         }
     }
 
+    //this method checks if the selected answer is correct or not
     private void checkAnswer(String selected, String correct) {
         if (selected.equals(correct)) {
             txtResult.setText("Correct!");
             txtResult.setTextColor(Color.GREEN);
-            System.out.print("Correct!");
+            System.out.print("Correct!"); //displays green correct if right in the text view
         } else {
             txtResult.setText("Wrong! It was " + correct);
             txtResult.setTextColor(Color.RED);
-            System.out.println("Incorrect! It was" + correct);
+            System.out.println("Incorrect! It was" + correct); //displays red and the right answer if incorrect in the text view
         }
 
+        //increate question index
         qCount++;
+        //ends game when gets to 10
         if(qCount<10) {
             nextQ();
         } else {
@@ -243,6 +246,7 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    //when previous button is clicked goes back
     private void prevClick(View v){
         finish();
     }
