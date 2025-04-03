@@ -26,7 +26,6 @@ public class CatsAdapter extends BaseAdapter {
         this.context = context;
     }
 
-
     @Override
     public int getCount() {
         return cats.size();

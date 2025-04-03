@@ -2,16 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/material_dynamic_neutral40">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="328dp" />
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/ivCatPic"
+        app:layout_constraintTop_toTopOf="@+id/ivCatPic" />
 
     <TextView
         android:id="@+id/tvOrigin"
@@ -19,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Origin"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
@@ -28,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Lifespan"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/tvOrigin"
         app:layout_constraintTop_toBottomOf="@+id/tvOrigin" />
 
@@ -35,8 +40,8 @@
         android:id="@+id/ivCatPic"
         android:layout_width="100dp"
         android:layout_height="99dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvOrigin"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
