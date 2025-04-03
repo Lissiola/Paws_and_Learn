@@ -211,7 +211,13 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         qCount++;
-        nextQ();
+        if(qCount<10) {
+            nextQ();
+        } else {
+            txtResult.setText("Quiz Completed!");
+            txtResult.setTextColor(Color.MAGENTA);
+            finish();
+        }
     }
 
     /*
