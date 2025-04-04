@@ -36,11 +36,11 @@ public class SettingsActivity extends AppCompatActivity {
         ivQuiz.setImageResource(R.drawable.quiz_image);
         // onClickListeners to open the equivalent activity
         btnCat.setOnClickListener(view -> {
-            Intent intent=new Intent(this,CatsActivity.class);
+            Intent intent=new Intent(this,CatActivity.class);
             startActivity(intent);
         });
         btnDog.setOnClickListener(view -> {
-            Intent intent=new Intent(this,DogsActivity.class);
+            Intent intent=new Intent(this,Dog_Activity.class);
             startActivity(intent);
         });
         btnQuiz.setOnClickListener(view -> {
