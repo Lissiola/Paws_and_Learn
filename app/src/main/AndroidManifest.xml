@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,15 +15,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PawsAndLearn"
         tools:targetApi="31">
+
+        <!-- jorgenep's Dog Activity -->
         <activity
             android:name=".Dog_Activity"
             android:exported="false" />
+
+        <!-- master's activities -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PawsAndLearn" />
+        
+        <activity
+            android:name=".CatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PawsAndLearn" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PawsAndLearn"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,5 +50,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
