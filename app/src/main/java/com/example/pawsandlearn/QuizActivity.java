@@ -39,7 +39,7 @@ public class QuizActivity extends AppCompatActivity {
     //xml definitions
     ImageView imgBreed;
     TextView txtResult;
-    Button btnRed, btnBlue, btnYellow, btnGreen;
+    Button btnRed, btnBlue, btnYellow, btnGreen,btnPrev;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,11 @@ public class QuizActivity extends AppCompatActivity {
         btnBlue = findViewById(R.id.btnBlue);
         btnYellow = findViewById(R.id.btnYellow);
         btnGreen = findViewById(R.id.btnGreen);
+        btnPrev=findViewById(R.id.btnPrev);
+
+        btnPrev.setOnClickListener(view -> {
+            finish();
+        });
 
         //inializing the volley request queue
         queue = Volley.newRequestQueue(this);
@@ -245,33 +250,5 @@ public class QuizActivity extends AppCompatActivity {
             finish();
         }
     }
-
-    //when previous button is clicked goes back
-    private void prevClick(View v){
-        finish();
-    }
-
-    /*
-    private void yellowClick(View v){
-        checkAnswer(multChoice[2], name);
-    }
-
-    private void greenClick(View v){
-        checkAnswer(multChoice[3], name);
-    }
-
-    private void blueClick(View v){
-        checkAnswer(multChoice[1], name);
-    }
-
-    private void redClick(View v){
-        checkAnswer(multChoice[0], name);
-    }
-
-    private void prevClick(View v){
-        finish();
-    }
-
-     */
 
 }
