@@ -16,11 +16,17 @@
         android:theme="@style/Theme.PawsAndLearn"
         tools:targetApi="31">
 
+        <!-- jorgenep's Dog Activity -->
+        <activity
+            android:name=".Dog_Activity"
+            android:exported="false" />
+
+        <!-- master's activities -->
         <activity
             android:name=".QuizActivity"
             android:exported="false"
             android:theme="@style/Theme.PawsAndLearn" />
-            
+        
         <activity
             android:name=".CatActivity"
             android:exported="false"
