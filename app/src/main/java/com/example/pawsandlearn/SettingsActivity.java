@@ -34,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
         ivCat.setImageResource(R.drawable.cat_image);
         ivDog.setImageResource(R.drawable.dog_image);
         ivQuiz.setImageResource(R.drawable.quiz_image);
+        // onClickListeners to open the equivalent activity
         btnCat.setOnClickListener(view -> {
             Intent intent=new Intent(this,CatsActivity.class);
             startActivity(intent);

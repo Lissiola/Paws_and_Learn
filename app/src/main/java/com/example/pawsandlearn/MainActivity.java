@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         btnStart=findViewById(R.id.btnStart);
         ivLogo=findViewById(R.id.ivLogo);
         ivLogo.setImageResource(R.drawable.paws_and_learn_logo);
+        // oncClickListener to start the settings activity
         btnStart.setOnClickListener(view -> {
             Intent intent=new Intent(this,SettingsActivity.class);
             startActivity(intent);
