@@ -15,14 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PawsAndLearn"
         tools:targetApi="31">
+
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PawsAndLearn" />
+            
         <activity
             android:name=".CatActivity"
             android:exported="false"
             android:theme="@style/Theme.PawsAndLearn" />
+
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.PawsAndLearn"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -36,5 +44,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
