@@ -2,6 +2,8 @@ package com.example.pawsandlearn;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-
+    Button btnStart;
+    ImageView ivLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +24,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-        startActivity(intent);
+        btnStart=findViewById(R.id.btnStart);
+        ivLogo=findViewById(R.id.ivLogo);
+        ivLogo.setImageResource(R.drawable.paws_and_learn_logo);
+        // oncClickListener to start the settings activity
+        btnStart.setOnClickListener(view -> {
+            Intent intent=new Intent(this,SettingsActivity.class);
+            startActivity(intent);
+        });
     }
 }
-//end of main

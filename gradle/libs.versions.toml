@@ -7,8 +7,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
-navigationFragment = "2.6.0"
-navigationUi = "2.6.0"
+navigationFragment = "2.8.7"
+navigationUi = "2.8.7"
 volley = "1.2.1"
 
 [libraries]
@@ -25,4 +25,3 @@ volley = { group = "com.android.volley", name = "volley", version.ref = "volley"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-
